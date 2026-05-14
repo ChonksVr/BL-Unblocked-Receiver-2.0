@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BL Unblocked — Chill Games, Anywhere</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg-1: #0b1224;
+    --bg-2: #1a1040;
+    --bg-3: #2a1458;
+    --accent: #7df9ff;
+    --accent-2: #ff7de1;
+    --accent-3: #b18cff;
+    --text: #ecf0ff;
+    --muted: #9aa3c7;
+    --card: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.12);
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: var(--text);
+    background: radial-gradient(1200px 800px at 10% -10%, #2b1769 0%, transparent 60%),
+                radial-gradient(900px 700px at 110% 10%, #0a3a5e 0%, transparent 55%),
+                linear-gradient(180deg, var(--bg-1), #050816 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+  /* Animated aurora blobs */
+  .blob {
+    position: fixed; border-radius: 50%; filter: blur(80px);
+    opacity: 0.5; pointer-events: none; z-index: 0;
+    animation: float 18s ease-in-out infinite;
+  }
+  .blob.b1 { width: 480px; height: 480px; background: #6b3cff; top: -120px; left: -100px; }
+  .blob.b2 { width: 420px; height: 420px; background: #00d4ff; bottom: -120px; right: -80px; animation-delay: -6s; }
+  .blob.b3 { width: 360px; height: 360px; background: #ff5cc7; top: 40%; left: 50%; animation-delay: -12s; }
+  @keyframes float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(40px,-30px) scale(1.08); }
+    66% { transform: translate(-30px,40px) scale(0.96); }
+  }
+  /* Stars */
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.7) 50%, transparent 51%),
+      radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6) 50%, transparent 51%),
+      radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.5) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 85% 25%, rgba(255,255,255,0.8) 50%, transparent 51%),
+      radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.6) 50%, transparent 51%);
+    background-size: 600px 600px; animation: twinkle 6s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100% {opacity:0.4} 50%{opacity:1} }
+
+  .wrap { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 28px 24px 80px; }
+
+  header.nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; border-radius: 18px;
+    background: rgba(10, 14, 35, 0.55);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: conic-gradient(from 220deg, var(--accent), var(--accent-3), var(--accent-2), var(--accent));
+    box-shadow: 0 0 24px rgba(125,249,255,0.45);
+    display: grid; place-items: center; color: #0b1224; font-weight: 800;
+  }
+  nav.links { display: flex; gap: 18px; }
+  nav.links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+  nav.links a:hover { color: var(--text); }
+
+  .hero { text-align: center; padding: 80px 16px 50px; }
+  .badge {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    background: rgba(125,249,255,0.1); border: 1px solid rgba(125,249,255,0.3);
+    color: var(--accent); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    font-size: clamp(44px, 7vw, 88px); line-height: 1.02; margin: 18px 0 14px;
+    background: linear-gradient(120deg, #ffffff 0%, var(--accent) 40%, var(--accent-2) 75%, var(--accent-3) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    background-size: 200% 200%; animation: shine 8s ease infinite;
+  }
+  @keyframes shine { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+  .sub { color: var(--muted); max-width: 620px; margin: 0 auto; font-size: 17px; }
+
+  .search {
+    margin: 30px auto 0; max-width: 540px; position: relative;
+  }
+  .search input {
+    width: 100%; padding: 16px 20px 16px 50px; border-radius: 16px;
+    background: rgba(255,255,255,0.06); color: var(--text);
+    border: 1px solid var(--border); outline: none; font-size: 15px;
+    transition: all .2s; font-family: inherit;
+  }
+  .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(125,249,255,0.15); }
+  .search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+
+  .section-title {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+    font-size: 22px; margin: 50px 0 20px;
+  }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  .card {
+    position: relative; border-radius: 18px; overflow: hidden;
+    background: var(--card); border: 1px solid var(--border);
+    cursor: pointer; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+    backdrop-filter: blur(8px);
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(125,249,255,0.5);
+    box-shadow: 0 20px 50px -20px rgba(125,249,255,0.45), 0 0 0 1px rgba(125,249,255,0.2);
+  }
+  .thumb {
+    aspect-ratio: 16/10; position: relative; overflow: hidden;
+    display: grid; place-items: center; font-size: 60px;
+    background-size: 200% 200%; animation: gradMove 12s ease infinite;
+  }
+  @keyframes gradMove { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+  .thumb::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.55));
+  }
+  .play-overlay {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    background: rgba(11,18,36,0.55); opacity: 0; transition: opacity .25s; z-index: 2;
+  }
+  .card:hover .play-overlay { opacity: 1; }
+  .play-overlay div {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--accent); display: grid; place-items: center; color: #0b1224;
+    box-shadow: 0 0 30px var(--accent);
+  }
+  .meta {
+    padding: 14px 16px 16px; position: relative; z-index: 1;
+  }
+  .meta h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; margin-bottom: 4px; }
+  .meta p { font-size: 12px; color: var(--muted); }
+  .tag {
+    position: absolute; top: 12px; right: 12px; z-index: 3;
+    padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    background: rgba(11,18,36,0.7); border: 1px solid var(--border); color: var(--accent);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed; inset: 0; background: rgba(5,8,22,0.85);
+    backdrop-filter: blur(8px); z-index: 100;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+    animation: fadeIn .25s ease;
+  }
+  .modal.active { display: flex; }
+  @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+  .modal-content {
+    width: 100%; max-width: 1100px; height: 85vh;
+    background: #0b1224; border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--border); display: flex; flex-direction: column;
+    animation: scaleIn .3s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes scaleIn { from{transform:scale(0.95);opacity:0} to{transform:scale(1);opacity:1} }
+  .modal-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 18px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  }
+  .modal-bar h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; }
+  .modal-bar button {
+    background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border);
+    padding: 8px 14px; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 13px;
+    transition: all .2s;
+  }
+  .modal-bar button:hover { background: var(--accent); color: #0b1224; border-color: var(--accent); }
+  .modal iframe { flex: 1; width: 100%; border: none; background: #000; }
+
+  footer {
+    text-align: center; margin-top: 80px; padding: 30px; color: var(--muted); font-size: 13px;
+  }
+  footer span { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    nav.links { display: none; }
+    .hero { padding: 50px 8px 30px; }
+  }
+</style>
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="stars"></div>
+
+  <div class="wrap">
+    <header class="nav">
+      <div class="logo">
+        <div class="logo-mark">BL</div>
+        <span>BL Unblocked</span>
+      </div>
+      <nav class="links">
+        <a href="#games">Games</a>
+        <a href="#popular">Popular</a>
+        <a href="#chill">Chill Zone</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <span class="badge">⚡ Always Unblocked · Always Chill</span>
+      <h1>Play. Relax.<br/>Repeat.</h1>
+      <p class="sub">A handpicked collection of unblocked browser games. No downloads, no logins — just press play and vibe out.</p>
+      <div class="search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Search a game..." />
+      </div>
+    </section>
+
+    <h2 class="section-title" id="games"><span class="dot"></span> Featured Games</h2>
+    <div class="grid" id="gameGrid"></div>
+
+    <footer>
+      Made with <span>♥</span> for the chill ones · BL Unblocked © 2026
+    </footer>
+  </div>
+
+  <div class="modal" id="gameModal">
+    <div class="modal-content">
+      <div class="modal-bar">
+        <h3 id="modalTitle">Game</h3>
+        <button onclick="closeGame()">✕ Close</button>
+      </div>
+      <iframe id="gameFrame" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+<script>
+  const games = [
+    { title: "Slope", tag: "Arcade", emoji: "🟢", grad: "linear-gradient(135deg,#00b09b,#96c93d)", url: "https://slope-game.github.io/" },
+    { title: "2048", tag: "Puzzle", emoji: "🔢", grad: "linear-gradient(135deg,#f7971e,#ffd200)", url: "https://play2048.co/" },
+    { title: "Chess", tag: "Classic", emoji: "♟️", grad: "linear-gradient(135deg,#232526,#414345)", url: "https://www.chess.com/play/computer" },
+    { title: "Tetris", tag: "Arcade", emoji: "🧱", grad: "linear-gradient(135deg,#7f00ff,#e100ff)", url: "https://tetris.com/play-tetris" },
+    { title: "Snake", tag: "Classic", emoji: "🐍", grad: "linear-gradient(135deg,#11998e,#38ef7d)", url: "https://playsnake.org/" },
+    { title: "Pac-Man", tag: "Retro", emoji: "👾", grad: "linear-gradient(135deg,#ff6a00,#ee0979)", url: "https://www.google.com/logos/2010/pacman10-i.html" },
+    { title: "Hextris", tag: "Puzzle", emoji: "⬢", grad: "linear-gradient(135deg,#36d1dc,#5b86e5)", url: "https://hextris.io/" },
+    { title: "Agar.io", tag: "Multiplayer", emoji: "⚪", grad: "linear-gradient(135deg,#fc466b,#3f5efb)", url: "https://agar.io/" },
+    { title: "Cookie Clicker", tag: "Idle", emoji: "🍪", grad: "linear-gradient(135deg,#d38312,#a83279)", url: "https://orteil.dashnet.org/cookieclicker/" },
+    { title: "Sandspiel", tag: "Sandbox", emoji: "🏖️", grad: "linear-gradient(135deg,#f2994a,#f2c94c)", url: "https://sandspiel.club/" },
+    { title: "Geoguessr-like", tag: "Geo", emoji: "🌍", grad: "linear-gradient(135deg,#1d976c,#93f9b9)", url: "https://openguessr.com/" },
+    { title: "Wordle", tag: "Daily", emoji: "🟩", grad: "linear-gradient(135deg,#56ab2f,#a8e063)", url: "https://wordlegame.org/" },
+    { title: "Drift Hunters", tag: "Racing", emoji: "🏎️", grad: "linear-gradient(135deg,#cb2d3e,#ef473a)", url: "https://drifthunters.io/" },
+    { title: "Paper.io", tag: "Multiplayer", emoji: "📄", grad: "linear-gradient(135deg,#ee9ca7,#ffdde1)", url: "https://paper-io.com/" },
+    { title: "Krunker", tag: "Shooter", emoji: "🔫", grad: "linear-gradient(135deg,#42275a,#734b6d)", url: "https://krunker.io/" },
+    { title: "Lofi Radio", tag: "Chill", emoji: "🎧", grad: "linear-gradient(135deg,#8e2de2,#4a00e0)", url: "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1" },
+  ];
+
+  const grid = document.getElementById('gameGrid');
+  function render(list) {
+    grid.innerHTML = list.map((g, i) => `
+      <div class="card" style="animation: fadeIn .5s ease ${i*0.04}s both" onclick="openGame('${encodeURIComponent(g.url)}','${g.title.replace(/'/g,"\\'")}')">
+        <span class="tag">${g.tag}</span>
+        <div class="thumb" style="background:${g.grad}">
+          <span style="position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))">${g.emoji}</span>
+          <div class="play-overlay"><div>▶</div></div>
+        </div>
+        <div class="meta">
+          <h3>${g.title}</h3>
+          <p>Click to play · Free</p>
+        </div>
+      </div>
+    `).join('');
+  }
+  render(games);
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    render(games.filter(g => g.title.toLowerCase().includes(q) || g.tag.toLowerCase().includes(q)));
+  });
+
+  function openGame(url, title) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('gameFrame').src = decodeURIComponent(url);
+    document.getElementById('gameModal').classList.add('active');
+  }
+  function closeGame() {
+    document.getElementById('gameModal').classList.remove('active');
+    document.getElementById('gameFrame').src = '';
+  }
+  document.getElementById('gameModal').addEventListener('click', e => {
+    if (e.target.id === 'gameModal') closeGame();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGame(); });
+
+  // Cursor glow trail
+  const trail = document.createElement('div');
+  Object.assign(trail.style, {
+    position:'fixed', width:'300px', height:'300px', borderRadius:'50%',
+    background:'radial-gradient(circle, rgba(125,249,255,0.15), transparent 60%)',
+    pointerEvents:'none', zIndex:'1', transform:'translate(-50%,-50%)',
+    transition:'transform .15s ease-out', mixBlendMode:'screen'
+  });
+  document.body.appendChild(trail);
+  document.addEventListener('mousemove', e => {
+    trail.style.left = e.clientX + 'px';
+    trail.style.top = e.clientY + 'px';
+  });
+</script>
+</body>
+</html>
